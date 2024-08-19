@@ -13,23 +13,17 @@ console.log("basic variable declaration\n", sum);
 for (var index = 0; index < 6; index++) {
     setTimeout(() => console.log("difference between variables in js\n", index), 0);
 
-}// output => 5,5,5,5 because the setTimeout callback will be called once the loop ends
+}
 
 
 for (let index = 0; index < 6; index++) {
     setTimeout(() => console.log("difference between variables in js\n", index), 0);
 
-}//output => 0,1,2,3,4
+}
 
 /**we can not reinitialize a const varible in a loop that is why it will 
 give a error everytime we run this*/
 
-/**for (const index = 0; index < 6; index++) {
-    setTimeout(() => console.log(index), 0);
-
-}*/
-
-//functions and their implementations 
 
 function total(a, b) {
     return console.log("Function declaration and implementation\n", a + b);
@@ -120,6 +114,7 @@ do {
 } while (total1 <= 20);
 
 /**continue */
+
 let check = 3;
 let final = 10;
 for (let i = 0; i < final; i++) {
@@ -282,5 +277,48 @@ newPromise.then(function () {
 
 let details = {
     name: "zargham",
-    age: 25
+    age: 25,
+    gender: "male"
 }
+
+const prox = new Proxy(details, {
+    get: function (target, prop) {
+        if (prop === 'gender') {
+            return "unauthorized"
+        } else if (prop in target) {
+            return target[prop];
+        }
+    }
+});
+console.log(prox.name);
+console.log(prox.age);
+console.log(prox.gender);
+
+/**
+ * among the three elements in the object of details we are only giving access 
+ * of display to only 2 of them rest are being displayed 
+ */
+
+/**Deletion in proxy */
+
+let detail = {
+    name: "Ahmed",
+    age: 25,
+    gender: "male",
+    skill: "development"
+}
+
+const handler = {
+    deleteProperty(target, prop) {
+        if (prop in target) {
+            delete target[prop]
+            console.log(`Removed: ${prop}`);
+        }
+    }
+};
+
+const proxy = new Proxy(detail, handler);
+
+console.log("This is going to be deleted:", proxy.gender);
+delete proxy.gender;
+console.log(proxy.gender);
