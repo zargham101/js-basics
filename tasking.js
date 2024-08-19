@@ -277,3 +277,10 @@ newPromise.then(function () {
 }).catch(function () {
     console.log("It does not work");
 })
+
+/**Proxy in js*/
+
+let details = {
+    name: "zargham",
+    age: 25
+}
