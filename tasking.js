@@ -322,3 +322,104 @@ const proxy = new Proxy(detail, handler);
 console.log("This is going to be deleted:", proxy.gender);
 delete proxy.gender;
 console.log(proxy.gender);
+
+/**function calls */
+
+function sampleFunction(a, s) {
+
+    return a + s;
+}
+
+let resultant = sampleFunction.call(this, 2, 3);
+console.log(resultant);
+//below refers to calling a function defined in an object 
+let employee = {
+    empDetails: function (designation, experience) {
+        return "The name of employee: " + this.name
+            + " \n"
+            + "ID:"
+            + this.id
+            + "\nDesignation:"
+            + designation
+            + "\nExperience:"
+            + experience
+    }
+}
+
+let emp1 = {
+    name: "Zargham",
+    id: "212"
+}
+
+let emp2 = {
+    name: " Ahmed ",
+    id: " 121 "
+}
+
+let post = employee.empDetails.call(emp1, " intern ", " 2 years ")
+
+console.log(post);
+
+let object = {
+    firstName: "Zargham",
+    lastName: "Shaukat",
+    age: 24
+
+}
+
+/**Anonymous Function */
+//there is no name for the defined function that is why it is an anonymous function
+let func = function (parameter1) {
+    return (
+
+        console.log("Hello " + parameter1)
+    )
+}
+
+func("zargham");
+
+/**Nested Function */
+
+function test5(a) {
+    function test3(b) {
+        return a + b
+    }
+    return test3;
+}
+
+function checkNest() {
+    console.log(test5("test it if this works")
+        (" \nit really works"))
+}
+
+checkNest();
+
+/**Async Function */
+
+const checkData = async () => {
+    let text = await "asynchrounous function";
+    return console.log(text)
+}
+
+console.log("Testing which outputs first");
+
+console.log("another test");
+
+checkData();
+console.log("final test");
+
+/**the resultant output of asynchronous function will let the other outputs to 
+ * execute and then execute its resultants */
+
+/**Regex in js (regex = regular expressions) */
+
+function myFunction() {
+    let str = "Hello, World!";
+    //i used here is a modifier
+    let txt = str.replace(/world/i, "Zargham");
+    console.log(txt);
+
+}
+
+myFunction();
+
